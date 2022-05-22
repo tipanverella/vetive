@@ -21,3 +21,4 @@ erDiagram
         string publisher_id
     }
 ```
+
