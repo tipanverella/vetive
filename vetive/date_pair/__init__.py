@@ -2,8 +2,9 @@
     This module implements an ordered date pair class,
     suitable for date ranges
 """
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from typing import Optional, Tuple
+from typing_extensions import Self
 from pydantic import BaseModel, root_validator
 
 
@@ -23,7 +24,7 @@ class DatePair(BaseModel):
         It is the entire raison-d'etre of this class
         :param values:
         :return:
-        """  ###***poukisa c konsa ou ekri bunch of code sa a?
+        """
         # no values provided
         # pylint: disable=no-else-raise
         if not values:
@@ -47,6 +48,8 @@ class DatePair(BaseModel):
         The number of days in the range
         :return:
         """
+        days = self.end_date - self.start_date + timedelta(days=1)
+        return days.days
 
     @property
     def pair(self) -> Tuple[date, date]:
@@ -54,15 +57,39 @@ class DatePair(BaseModel):
         Convenient tuple version of the object
         :return:
         """
+        return self.start_date, self.end_date
 
     def contains(self, val) -> bool:
         """Checks if the val provided is contained in the current DatePair"""
         res = False
+        if isinstance(val, DatePair):
+            if self.start_date <= val.start_date and self.end_date >= val.end_date:
+                res = True
+        elif isinstance(val, date or datetime):
+            if self.start_date <= val <= self.end_date:
+                res = True
+        else:
+            raise ValueError(
+                "The argument value given must be either a datepair, a date or a datetime object"
+            )
         return res
 
-    def overlaps(self, val) -> bool:  ###***saw vle di par overlaps la?
+    def overlaps(self, val) -> bool:
         """Checks if the val provided overlaps with the current DatePair"""
         res = False
+        if isinstance(val, DatePair):
+            if self.start_date < val.start_date and self.end_date < val.end_date:
+                res = True
+            elif val.start_date < self.start_date and val.end_date < self.end_date:
+                res = True
+            elif val.start_date == self.start_date and val.end_date > self.end_date:
+                res =True
+            elif val.start_date < self.start_date and val.end_date == self.end_date:
+                res = True
+        else:
+            raise ValueError(
+                "The argument value given must be either a datepair, a date or a datetime object"
+            )
         return res
 
     def slack_bumper(self, val: int):
@@ -76,3 +103,4 @@ class DatePair(BaseModel):
         if val < 0:
             raise ValueError(f"{val} should be non negative!")
         self.start_date -= timedelta(days=val)
+
