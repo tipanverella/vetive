@@ -19,7 +19,7 @@ test:
 	poetry run pytest -vv
 
 coverage:
-	poetry run pytest -vv --cov=dsa_utils --cov-report=term --cov-report=html
+	poetry run pytest -vv --cov=vetive --cov-report=term --cov-report=html
 
 push: lint build
 	$(CC) version patch
