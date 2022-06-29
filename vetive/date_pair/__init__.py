@@ -92,6 +92,9 @@ class DatePair(BaseModel):
             )
         return res
 
+
+###***eske mwen met rajoute kek lot foncksyonalite nan fonction sa a???
+
     def slack_bumper(self, val: int):
         """
         pushes the start_date back by val days
