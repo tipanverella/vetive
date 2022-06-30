@@ -106,4 +106,3 @@ class DatePair(BaseModel):
         if val < 0:
             raise ValueError(f"{val} should be non negative!")
         self.start_date -= timedelta(days=val)
-
