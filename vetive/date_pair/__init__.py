@@ -34,7 +34,7 @@ class DatePair(BaseModel):
             values["end_date"] = date.today()
         # at least one value provided
         else:
-            if not values["end_date"]:
+            if not values["end_date"]: 
                 values["end_date"] = date.today()
             elif not values["start_date"]:
                 values["start_date"] = values["end_date"]
@@ -68,10 +68,6 @@ class DatePair(BaseModel):
         elif isinstance(val, date or datetime):
             if self.start_date <= val <= self.end_date:
                 res = True
-        else:
-            raise ValueError(
-                "The argument value given must be either a datepair, a date or a datetime object"
-            )
         return res
 
     def overlaps(self, val) -> bool:
@@ -86,10 +82,6 @@ class DatePair(BaseModel):
                 res =True
             elif val.start_date < self.start_date and val.end_date == self.end_date:
                 res = True
-        else:
-            raise ValueError(
-                "The argument value given must be either a datepair, a date or a datetime object"
-            )
         return res
 
 
