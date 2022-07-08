@@ -34,7 +34,7 @@ class DatePair(BaseModel):
             values["end_date"] = date.today()
         # at least one value provided
         else:
-            if not values["end_date"]: 
+            if not values["end_date"]:
                 values["end_date"] = date.today()
             elif not values["start_date"]:
                 values["start_date"] = values["end_date"]
@@ -81,9 +81,6 @@ class DatePair(BaseModel):
             elif val.contains(self):
                 res = True
         return res
-
-
-###***eske mwen met rajoute kek lot foncksyonalite nan fonction sa a???
 
     def slack_bumper(self, val: int):
         """
