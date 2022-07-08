@@ -74,13 +74,11 @@ class DatePair(BaseModel):
         """Checks if the val provided overlaps with the current DatePair"""
         res = False
         if isinstance(val, DatePair):
-            if self.start_date < val.start_date and self.end_date < val.end_date:
+            if self.contains(val):
                 res = True
-            elif val.start_date < self.start_date and val.end_date < self.end_date:
+            elif self.contains(val.start_date) or self.contains(val.end_date):
                 res = True
-            elif val.start_date == self.start_date and val.end_date > self.end_date:
-                res =True
-            elif val.start_date < self.start_date and val.end_date == self.end_date:
+            elif val.contains(self):
                 res = True
         return res
 

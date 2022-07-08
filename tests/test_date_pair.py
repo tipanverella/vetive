@@ -13,7 +13,7 @@ class TestDatePair(unittest.TestCase):
     def setUp(self) -> None:
         self.today = date.today()
         self.no_date = DatePair()
-        self.jodia = DatePair()                                                          ###***explikem parti sa stp!!!!
+        self.jodia = DatePair()
         self.start = DatePair(start_date="1979-01-12")
         self.end = DatePair(end_date="1979-01-12")
         self.sam = DatePair(end_date="1977-02-13")
