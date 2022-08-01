@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vetive"
-version = "0.1.1"
+version = "0.1.2"
 description = "Rasin videyo YouTube"
 authors = ["J. Tipan Verella <tverella@tunein.com>", "Dede Assann <dedeassann20@gmail.com>"]
 
