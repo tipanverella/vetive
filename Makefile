@@ -10,16 +10,19 @@ lint: $(PYTHONFILES) $(ACTIONS)
 	$(CC) run black $(PYTHONFILES)
 	$(CC) run pylint $(PYTHONFILES)
 
-build: $(PYTHONFILES) coverage
+build: $(PYTHONFILES) mypy coverage
 	$(CC) update
 	$(CC) export --format requirements.txt --without-hashes --output requirements.txt
 	$(CC) build
 
+mypy:
+	$(CC) run mypy $(PYTHONFILES)
+
 test: 
-	poetry run pytest -vv
+	$(CC) run pytest -vv
 
 coverage:
-	poetry run pytest -vv --cov=vetive --cov-report=term --cov-report=html
+	$(CC) run pytest -vv --cov=$(PYTHONFILES) --cov-report=term --cov-report=html
 
 push: lint build
 	$(CC) version patch
