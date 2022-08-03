@@ -21,3 +21,9 @@ def test_merge_sorted_lists():
     assert output == expected_output
     output = merge_sorted_lists(list2,list1)
     assert output == expected_output
+    output = merge_sorted_lists(list1, [])
+    assert output == list1
+    output = merge_sorted_lists([], list2)
+    assert output == list2
+    output = merge_sorted_lists([], [])
+    assert output == []
