@@ -4,7 +4,7 @@
 """
 
 import os
-from typing import Optional, Union
+from typing import Optional
 
 
 def get_env_var(env_var_name: str) -> Optional[str]:
