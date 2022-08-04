@@ -1,5 +1,6 @@
 CC=poetry
 PYTHONFILES=vetive
+TESTFILES=tests
 GIT=git
 
 
@@ -20,6 +21,7 @@ mypy:
 	$(CC) run mypy $(PYTHONFILES)
 
 test: 
+	$(CC) run black $(TESTFILES)
 	$(CC) run pytest -vv
 
 coverage:

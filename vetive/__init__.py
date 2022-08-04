@@ -4,8 +4,10 @@
 """
 
 from copy import deepcopy
+from itertools import repeat
+from math import ceil, sqrt
 import os
-from typing import List, Optional
+from typing import Generator, List, Optional
 
 
 def get_env_var(env_var_name: str) -> Optional[str]:
@@ -32,3 +34,40 @@ def merge_sorted_lists(list1: List, list2: List) -> List:
                 yield ell_two.pop(0)
 
     return list(_helper_generator())
+
+
+def is_palindrome(word: str) -> bool:
+    """Checks whether a word is a palindrome"""
+    return word[::-1] == word
+
+
+def is_prime(num: int) -> bool:
+    """Checks if num is prime"""
+    last_candidate = ceil(sqrt(num))
+    answer = True
+    if num == 2:
+        answer = True
+    else:
+        for _ in range(2, 1 + last_candidate):
+            if num % _ == 0:
+                answer = False
+                break
+    return answer
+
+
+def star_triangle(st_size: int) -> None:
+    """return an appropriate size star triangle"""
+    for _ in range(1, 1 + st_size):
+        print("".join(repeat("*", _)))
+
+
+def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, None]:
+    """generates Fibonacci Numbers up to the max value"""
+    last_two = 0, 1
+    if max_value == 0:
+        yield last_two[0]
+    else:
+        yield last_two[0]
+        while last_two[1] <= max_value:
+            yield last_two[1]
+            last_two = last_two[1], sum(last_two)
