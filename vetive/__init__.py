@@ -71,3 +71,10 @@ def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, No
         while last_two[1] <= max_value:
             yield last_two[1]
             last_two = last_two[1], sum(last_two)
+
+
+def konte1a10():
+    """fonksyon sa a konte de 1 a 10"""
+    for _ in range(1, 11):
+        print(_)
+
