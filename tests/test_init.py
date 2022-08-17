@@ -1,7 +1,7 @@
 """ tests for init"""
 
 from vetive import (
-    fibonacci_numbers_generator,
+    fibonacci_numbers,
     get_env_var,
     is_palindrome,
     is_prime,
@@ -46,14 +46,14 @@ def test_is_palindrome():
 
 def test_fibonacci_numbers_generator():
     """test fibonacci_numbers_generator"""
-    assert list(fibonacci_numbers_generator(0)) == [
+    assert list(fibonacci_numbers(0)) == [
         0,
     ]
-    assert list(fibonacci_numbers_generator(1)) == [0, 1, 1]
-    assert list(fibonacci_numbers_generator(2)) == [0, 1, 1, 2]
-    assert list(fibonacci_numbers_generator(3)) == [0, 1, 1, 2, 3]
-    assert list(fibonacci_numbers_generator(4)) == [0, 1, 1, 2, 3]
-    assert list(fibonacci_numbers_generator(88)) == [
+    assert list(fibonacci_numbers(1)) == [0, 1, 1]
+    assert list(fibonacci_numbers(2)) == [0, 1, 1, 2]
+    assert list(fibonacci_numbers(3)) == [0, 1, 1, 2, 3]
+    assert list(fibonacci_numbers(4)) == [0, 1, 1, 2, 3]
+    assert list(fibonacci_numbers(88)) == [
         0,
         1,
         1,

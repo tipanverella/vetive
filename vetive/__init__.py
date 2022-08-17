@@ -61,7 +61,7 @@ def star_triangle(st_size: int) -> None:
         print("".join(repeat("*", _)))
 
 
-def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, None]:
+def fibonacci_numbers(max_value: int = 100) -> Generator[int, None, None]:
     """generates Fibonacci Numbers up to the max value"""
     last_two = 0, 1
     if max_value == 0:
@@ -72,6 +72,14 @@ def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, No
             yield last_two[1]
             last_two = last_two[1], sum(last_two)
 
+
+def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
+    """
+        generates words from several text files (*.txt) under the directory,
+        where a word is just a string a characters with no spaces, and a line
+        is delimited by the return ('\n') character.
+    """
+    ...
 
 def konte1a10():
     """fonksyon sa a konte de 1 a 10"""
