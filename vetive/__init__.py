@@ -82,18 +82,21 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     is delimited by the return ('\n') character.
     """
     word = ""
+    syntax = [",", "[", "]", "{", "}", "^", "#", "="]
     for filepath in all_files_oftype(directory_path, "txt"):
-        with open(filepath, "r", encoding="utf-8") as filereader:
-            text = filereader.readlines()
-        for line in text:
-            for char in line:
-                if char == ",":
-                    pass
-                elif char == "\n":
-                    pass
-                else:
+        with open(filepath, "r", encoding="utf-8") as file_reader:
+            text = file_reader.readlines()
+            for line in text:
+                for char in line:
                     if char != " ":
-                        word += char
+                        if char == "\n":
+                            pass
+                        else:
+                            for i in syntax:
+                                if char == i:
+                                    yield char
+                            else:
+                                word += char
                     else:
                         yield word
                         word = ""
