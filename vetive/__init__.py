@@ -93,6 +93,7 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
                         word += char
                     else:
                         yield word
+                        word = ""
 
 
 def konte1a10():
@@ -106,13 +107,23 @@ def words(file_name: str):
     word = ""
     for line in file_name:
         for char in line:
-            if char == ",":
-                pass
-            elif char == "\n":
-                pass
+            if char != ",":
+                if char != "\n":
+                    if char != " ":
+                        word += char
             else:
-                if char != " ":
-                    word += char
-                else:
-                    yield word
-                    word = ""
+                yield word
+                word = " "
+
+
+def word1(file_name: str):
+    """..."""
+    word = ""
+    for line in file_name:
+        for char in line:
+            while char != "," or "\n" or " ":
+                word += char
+                break
+            else:
+                yield word
+                word = ""
