@@ -6,6 +6,7 @@
 from copy import deepcopy
 from itertools import repeat
 from math import ceil, sqrt
+import random
 import os
 import glob
 from typing import Generator, List, Optional
@@ -81,8 +82,10 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     is delimited by the return ('\n') character.
     """
     word = ""
-    for file in glob.glob(directory_path + "*.txt"):
-        for line in file:
+    for filepath in all_files_oftype(directory_path, "txt"):
+        with open(filepath, "r", encoding="utf-8") as filereader:
+            text = filereader.readlines()
+        for line in text:
             for char in line:
                 if char == ",":
                     pass
@@ -94,6 +97,11 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
                     else:
                         yield word
                         word = ""
+
+
+def all_files_oftype(directory_path, extension: str) -> List[str]:
+    """returns a list of all files in a directory ending with the provided extension"""
+    return glob.glob(f"{directory_path}/*.{extension}")
 
 
 def konte1a10():
@@ -127,3 +135,8 @@ def word1(file_name: str):
             else:
                 yield word
                 word = ""
+
+
+def random_digit_string(length: int = 6):
+    """return a string of random digits"""
+    return str(random.randint(1, 10**length)).zfill(length)

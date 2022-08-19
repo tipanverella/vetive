@@ -1,4 +1,7 @@
 """ tests for init"""
+import os
+from os import makedirs, rmdir
+import pathlib
 
 from vetive import (
     fibonacci_numbers,
@@ -6,7 +9,8 @@ from vetive import (
     is_palindrome,
     is_prime,
     merge_sorted_lists,
-    words_from_corpus
+    random_digit_string,
+    all_files_oftype,
 )
 
 
@@ -74,6 +78,19 @@ def test_words_from_corpus():
     ...
 
 
+def test_all_files_oftype():
+    """test all_files_oftype"""
+    # empty directory
+    tmp_dir_name = f"tmp_directory_{random_digit_string()}"
+    makedirs(tmp_dir_name)
+    assert all_files_oftype(tmp_dir_name, "txt") == []
+    # directory with no files of the type
+    assert all_files_oftype(tmp_dir_name, tmp_dir_name) == []
+    # when there is stuff to return
+    pathlib.Path(f"{tmp_dir_name}/all_files_oftype.txt").touch()
+    assert all_files_oftype(tmp_dir_name, "txt") == [f"{tmp_dir_name}/all_files_oftype.txt"]
+    os.remove(f"{tmp_dir_name}/all_files_oftype.txt")
+    rmdir(tmp_dir_name)
 
 def test_is_prime():
     """test is_prime"""
