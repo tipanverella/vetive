@@ -6,6 +6,7 @@ from vetive import (
     is_palindrome,
     is_prime,
     merge_sorted_lists,
+    words_from_corpus
 )
 
 
@@ -66,6 +67,12 @@ def test_fibonacci_numbers_generator():
         34,
         55,
     ]
+
+
+def test_words_from_corpus():
+    """test words_from_corpus"""
+    ...
+
 
 
 def test_is_prime():

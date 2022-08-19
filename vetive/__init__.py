@@ -7,6 +7,7 @@ from copy import deepcopy
 from itertools import repeat
 from math import ceil, sqrt
 import os
+import glob
 from typing import Generator, List, Optional
 
 
@@ -75,14 +76,43 @@ def fibonacci_numbers(max_value: int = 100) -> Generator[int, None, None]:
 
 def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     """
-        generates words from several text files (*.txt) under the directory,
-        where a word is just a string a characters with no spaces, and a line
-        is delimited by the return ('\n') character.
+    generates words from several text files (*.txt) under the directory,
+    where a word is just a string of characters with no spaces, and a line
+    is delimited by the return ('\n') character.
     """
-    ...
+    word = ""
+    for file in glob.glob(directory_path + "*.txt"):
+        for line in file:
+            for char in line:
+                if char == ",":
+                    pass
+                elif char == "\n":
+                    pass
+                else:
+                    if char != " ":
+                        word += char
+                    else:
+                        yield word
+
 
 def konte1a10():
     """fonksyon sa a konte de 1 a 10"""
     for _ in range(1, 11):
         print(_)
 
+
+def words(file_name: str):
+    """...."""
+    word = ""
+    for line in file_name:
+        for char in line:
+            if char == ",":
+                pass
+            elif char == "\n":
+                pass
+            else:
+                if char != " ":
+                    word += char
+                else:
+                    yield word
+                    word = ""
