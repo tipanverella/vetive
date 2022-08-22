@@ -128,7 +128,6 @@ def test_is_part_of():
     assert is_part_of("a", list3) == True
     assert is_part_of(True, set_ex) == True
     assert is_part_of("x", list3) == False
-    ...
 
 
 def test_all_files_oftype():
