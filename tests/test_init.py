@@ -3,7 +3,7 @@ import os
 from os import makedirs, rmdir
 import pathlib
 
-from vetive import (
+from vetive.__init__ import (
     fibonacci_numbers,
     get_env_var,
     is_palindrome,
@@ -11,6 +11,7 @@ from vetive import (
     merge_sorted_lists,
     random_digit_string,
     all_files_oftype,
+    is_part_of,
     words_from_corpus,
 )
 
@@ -76,7 +77,57 @@ def test_fibonacci_numbers_generator():
 
 def test_words_from_corpus():
     """test words_from_corpus"""
-    assert words_from_corpus("")
+    assert list(words_from_corpus("tests/corpus")) == [
+        "Bonjour",
+        "le",
+        "monde!",
+        "Hello",
+        "world!",
+        "Buenos",
+        "dias!",
+        "Comment",
+        "allez",
+        "vous?",
+        "Je",
+        "suis",
+        "Dede",
+        "Assann",
+        "et",
+        "j",
+        "apprend",
+        "a",
+        "programmer",
+        "avec",
+        "Tipan",
+        "Verella",
+        "Il",
+        "est",
+        "un",
+        '"Data',
+        'scientist"',
+        "et",
+        "vit",
+        "aux",
+        "USA",
+    ]
+
+
+def test_is_part_of():
+    """test is_part_of"""
+    # preparing the tests
+    list1 = []
+    list2 = [1, 2, 3, 4, 5]
+    list3 = ["a", "b", "c"]
+    set_ex = {2, "a", True}
+    # testing the fonction
+    assert is_part_of(1, list2) == True
+    assert is_part_of(1, list1) == False
+    assert is_part_of(1, list3) == False
+    assert is_part_of("a", list1) == False
+    assert is_part_of("a", list2) == False
+    assert is_part_of("a", list3) == True
+    assert is_part_of(True, set_ex) == True
+    assert is_part_of("x", list3) == False
     ...
 
 

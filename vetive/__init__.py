@@ -84,7 +84,7 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     """
     word = ""
     # list of syntax/symbols to ignore as part of a word
-    syntax = [",", "[", "]", "{", "}", "#", "\n", ".", " "]
+    syntax = [",", "[", "]", "-", "'", "{", "}", "#", "\n", ".", " "]
     # looping through the corpus directory
     for filepath in all_files_oftype(directory_path, "txt"):
         # opening the files
