@@ -11,6 +11,7 @@ from vetive import (
     merge_sorted_lists,
     random_digit_string,
     all_files_oftype,
+    words_from_corpus,
 )
 
 
@@ -75,6 +76,7 @@ def test_fibonacci_numbers_generator():
 
 def test_words_from_corpus():
     """test words_from_corpus"""
+    assert words_from_corpus("")
     ...
 
 
@@ -88,9 +90,12 @@ def test_all_files_oftype():
     assert all_files_oftype(tmp_dir_name, tmp_dir_name) == []
     # when there is stuff to return
     pathlib.Path(f"{tmp_dir_name}/all_files_oftype.txt").touch()
-    assert all_files_oftype(tmp_dir_name, "txt") == [f"{tmp_dir_name}/all_files_oftype.txt"]
+    assert all_files_oftype(tmp_dir_name, "txt") == [
+        f"{tmp_dir_name}/all_files_oftype.txt"
+    ]
     os.remove(f"{tmp_dir_name}/all_files_oftype.txt")
     rmdir(tmp_dir_name)
+
 
 def test_is_prime():
     """test is_prime"""

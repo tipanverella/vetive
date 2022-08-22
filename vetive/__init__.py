@@ -9,7 +9,8 @@ from math import ceil, sqrt
 import random
 import os
 import glob
-from typing import Generator, List, Optional
+from typing import Generator, List, Optional, Set
+from xmlrpc.client import Boolean
 
 
 def get_env_var(env_var_name: str) -> Optional[str]:
@@ -82,22 +83,31 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     is delimited by the return ('\n') character.
     """
     word = ""
-    syntax = [",", "[", "]", "{", "}", "^", "#", "="]
+    # list of syntax/symbols to ignore as part of a word
+    syntax = [",", "[", "]", "{", "}", "#", "\n", ".", " "]
+    # looping through the corpus directory
     for filepath in all_files_oftype(directory_path, "txt"):
+        # opening the files
         with open(filepath, "r", encoding="utf-8") as file_reader:
+            # reading each line of a file
             text = file_reader.readlines()
             for line in text:
                 for char in line:
-                    if char != " ":
-                        if char == "\n":
-                            pass
-                        for i in syntax:
-                            if char == i:
-                                yield char
-                        word += char
-                    else:
+                    if is_part_of(char, syntax):
+                        if word == "":
+                            continue
                         yield word
                         word = ""
+                    else:
+                        word += char
+
+
+def is_part_of(elem: int or float or str, ensemble: List or Set) -> Boolean:
+    """A fonction that checks if the given value is part of a set"""
+    for _ in ensemble:
+        if elem == _:
+            return True
+    return False
 
 
 def all_files_oftype(directory_path, extension: str) -> List[str]:
@@ -111,31 +121,21 @@ def konte1a10():
         print(_)
 
 
-def words(file_name: str):
+def words_from_file(file_path: str):
     """...."""
     word = ""
-    for line in file_name:
-        for char in line:
-            if char != ",":
-                if char != "\n":
-                    if char != " ":
-                        word += char
-            else:
-                yield word
-                word = " "
-
-
-def word1(file_name: str):
-    """..."""
-    word = ""
-    for line in file_name:
-        for char in line:
-            while char != "\n":
-                word += char
-                break
-            else:
-                yield word
-                word = ""
+    with open(file_path, "r", encoding="utf-8") as file_reader:
+        file = file_reader.readlines()
+        print(file)
+        for line in file:
+            for char in line:
+                if char != ",":
+                    if char != "\n":
+                        if char != " ":
+                            word += char
+                else:
+                    yield word
+                    word = " "
 
 
 def random_digit_string(length: int = 6):
