@@ -103,7 +103,10 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
 
 
 def is_part_of(elem: int or float or str, ensemble: List or Set) -> Boolean:
-    """A fonction that checks if the given value is part of a set"""
+    """
+    A fonction that checks if the given value is part of a set
+    (based on the mathematical principle of inclusion)
+    """
     for _ in ensemble:
         if elem == _:
             return True
