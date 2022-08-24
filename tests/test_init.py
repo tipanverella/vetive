@@ -11,7 +11,6 @@ from vetive.__init__ import (
     merge_sorted_lists,
     random_digit_string,
     all_files_oftype,
-    is_part_of,
     words_from_corpus,
 )
 
@@ -80,14 +79,14 @@ def test_words_from_corpus():
     assert list(words_from_corpus("tests/corpus")) == [
         "Bonjour",
         "le",
-        "monde!",
+        "monde",
         "Hello",
-        "world!",
+        "world",
         "Buenos",
-        "dias!",
+        "dias",
         "Comment",
         "allez",
-        "vous?",
+        "vous",
         "Je",
         "suis",
         "Dede",
@@ -103,31 +102,13 @@ def test_words_from_corpus():
         "Il",
         "est",
         "un",
-        '"Data',
-        'scientist"',
+        "Data",
+        "scientist",
         "et",
         "vit",
         "aux",
         "USA",
     ]
-
-
-def test_is_part_of():
-    """test is_part_of"""
-    # preparing the tests
-    list1 = []
-    list2 = [1, 2, 3, 4, 5]
-    list3 = ["a", "b", "c"]
-    set_ex = {2, "a", True}
-    # testing the fonction
-    assert is_part_of(1, list2) == True
-    assert is_part_of(1, list1) == False
-    assert is_part_of(1, list3) == False
-    assert is_part_of("a", list1) == False
-    assert is_part_of("a", list2) == False
-    assert is_part_of("a", list3) == True
-    assert is_part_of(True, set_ex) == True
-    assert is_part_of("x", list3) == False
 
 
 def test_all_files_oftype():

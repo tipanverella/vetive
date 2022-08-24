@@ -4,6 +4,7 @@
 """
 
 from copy import deepcopy
+import re
 from itertools import repeat
 from math import ceil, sqrt
 import random
@@ -82,9 +83,7 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     where a word is just a string of characters with no spaces, and a line
     is delimited by the return ('\n') character.
     """
-    word = ""
     # list of syntax/symbols to ignore as part of a word
-    syntax = [",", "[", "]", "-", "'", "{", "}", "#", "\n", ".", " "]
     # looping through the corpus directory
     for filepath in all_files_oftype(directory_path, "txt"):
         # opening the files
@@ -92,25 +91,10 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
             # reading each line of a file
             text = file_reader.readlines()
             for line in text:
-                for char in line:
-                    if is_part_of(char, syntax):
-                        if word == "":
-                            continue
-                        yield word
-                        word = ""
-                    else:
-                        word += char
-
-
-def is_part_of(elem: int or float or str, ensemble: List or Set) -> Boolean:
-    """
-    A fonction that checks if the given value is part of a set
-    (based on the mathematical principle of inclusion)
-    """
-    for _ in ensemble:
-        if elem == _:
-            return True
-    return False
+                for word in re.sub(
+                    r"\"|,|\'|\.|\n|\!|\-|\?", " ", line.strip()
+                ).split():
+                    yield word
 
 
 def all_files_oftype(directory_path, extension: str) -> List[str]:
@@ -122,23 +106,6 @@ def konte1a10():
     """fonksyon sa a konte de 1 a 10"""
     for _ in range(1, 11):
         print(_)
-
-
-def words_from_file(file_path: str):
-    """...."""
-    word = ""
-    with open(file_path, "r", encoding="utf-8") as file_reader:
-        file = file_reader.readlines()
-        print(file)
-        for line in file:
-            for char in line:
-                if char != ",":
-                    if char != "\n":
-                        if char != " ":
-                            word += char
-                else:
-                    yield word
-                    word = " "
 
 
 def random_digit_string(length: int = 6):
