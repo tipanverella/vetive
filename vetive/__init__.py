@@ -84,6 +84,18 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
     is delimited by the return ('\n') character.
     """
     # list of syntax/symbols to ignore as part of a word
+    break_characters = [
+        "/",
+        ";",
+        ":",
+        "<",
+        ">",
+        "^",
+        "*",
+    ]
+    # looping through the list of break_characters
+    for _ in break_characters:
+        ...
     # looping through the corpus directory
     for filepath in all_files_oftype(directory_path, "txt"):
         # opening the files
@@ -92,7 +104,7 @@ def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
             text = file_reader.readlines()
             for line in text:
                 for word in re.sub(
-                    r"\"|,|\'|\.|\n|\!|\-|\?", " ", line.strip()
+                    r"\"|,|\'|\.|\n|\!|\-|\?|", " ", line.strip()
                 ).split():
                     yield word
 

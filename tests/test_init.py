@@ -76,7 +76,7 @@ def test_fibonacci_numbers_generator():
 
 def test_words_from_corpus():
     """test words_from_corpus"""
-    assert list(words_from_corpus("tests/corpus")) == [
+    assert list(words_from_corpus("tests/corpus/corpus_single")) == [
         "Bonjour",
         "le",
         "monde",
@@ -109,6 +109,8 @@ def test_words_from_corpus():
         "aux",
         "USA",
     ]
+    assert words_from_corpus("tests/corpus/corpus_vid") == []
+    assert words_from_corpus("tests/corpus/corpus_multiple") == [...]
 
 
 def test_all_files_oftype():
