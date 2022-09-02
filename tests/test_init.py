@@ -88,8 +88,7 @@ def test_words_from_corpus():
         "go",
         "tool",
         "poetry",
-        "tverella",
-        "tunein",
+        "tverella@tunein",
         "com",
     ]
 
