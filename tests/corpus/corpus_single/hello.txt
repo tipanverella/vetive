@@ -1,6 +1,1 @@
 Bonjour le monde!
-Hello world!
-Buenos dias!
-
-Comment-allez vous?
-Je suis Dede Assann, et j'apprend a programmer avec Tipan Verella. Il est un "Data scientist", et vit aux USA.

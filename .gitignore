@@ -1,10 +1,14 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.idea
+programasyon-python.code-workspace
 *.py[cod]
 *$py.class
 
 # C extensions
 *.so
+*.ps1
+
 
 # Distribution / packaging
 .Python
