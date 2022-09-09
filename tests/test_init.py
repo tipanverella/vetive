@@ -82,7 +82,7 @@ def test_words_from_corpus():
         "le",
         "monde",
     ]
-    assert list(words_from_corpus("tests/corpus/corpus_multiple")) == [
+    assert set(words_from_corpus("tests/corpus/corpus_multiple")) == {
         "Before",
         "I",
         "go",
@@ -90,7 +90,7 @@ def test_words_from_corpus():
         "poetry",
         "tverella@tunein",
         "com",
-    ]
+    }
 
 
 def test_all_files_oftype():
