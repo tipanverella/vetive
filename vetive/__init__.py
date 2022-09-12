@@ -58,6 +58,16 @@ def is_prime(num: int) -> bool:
                 break
     return answer
 
+def is_prime2(num: int) -> Generator:
+    """Checks if numbers contained in a specific range is prime.
+    So, it uses the implementation of the is_prime function to checks
+    that, but unlike is_prime function, it doesnt return a boolean
+    value, it returns a list of all the prime numbers in that range."""
+    
+    for  number in range(2, num):
+        if is_prime(number):
+            yield number
+
 
 def star_triangle(st_size: int) -> None:
     """return an appropriate size star triangle"""
