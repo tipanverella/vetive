@@ -1,11 +1,17 @@
 """ tests for init"""
+import os
+from os import makedirs, rmdir
+import pathlib
 
-from vetive import (
-    fibonacci_numbers_generator,
+from vetive.__init__ import (
+    fibonacci_numbers,
     get_env_var,
     is_palindrome,
     is_prime,
     merge_sorted_lists,
+    random_digit_string,
+    all_files_oftype,
+    words_from_corpus,
 )
 
 
@@ -46,14 +52,14 @@ def test_is_palindrome():
 
 def test_fibonacci_numbers_generator():
     """test fibonacci_numbers_generator"""
-    assert list(fibonacci_numbers_generator(0)) == [
+    assert list(fibonacci_numbers(0)) == [
         0,
     ]
-    assert list(fibonacci_numbers_generator(1)) == [0, 1, 1]
-    assert list(fibonacci_numbers_generator(2)) == [0, 1, 1, 2]
-    assert list(fibonacci_numbers_generator(3)) == [0, 1, 1, 2, 3]
-    assert list(fibonacci_numbers_generator(4)) == [0, 1, 1, 2, 3]
-    assert list(fibonacci_numbers_generator(88)) == [
+    assert list(fibonacci_numbers(1)) == [0, 1, 1]
+    assert list(fibonacci_numbers(2)) == [0, 1, 1, 2]
+    assert list(fibonacci_numbers(3)) == [0, 1, 1, 2, 3]
+    assert list(fibonacci_numbers(4)) == [0, 1, 1, 2, 3]
+    assert list(fibonacci_numbers(88)) == [
         0,
         1,
         1,
@@ -66,6 +72,42 @@ def test_fibonacci_numbers_generator():
         34,
         55,
     ]
+
+
+def test_words_from_corpus():
+    """test words_from_corpus"""
+    assert list(words_from_corpus("tests/corpus/corpus_vid")) == []
+    assert list(words_from_corpus("tests/corpus/corpus_single")) == [
+        "Bonjour",
+        "le",
+        "monde",
+    ]
+    assert set(words_from_corpus("tests/corpus/corpus_multiple")) == {
+        "Before",
+        "I",
+        "go",
+        "tool",
+        "poetry",
+        "tverella@tunein",
+        "com",
+    }
+
+
+def test_all_files_oftype():
+    """test all_files_oftype"""
+    # empty directory
+    tmp_dir_name = f"tmp_directory_{random_digit_string()}"
+    makedirs(tmp_dir_name)
+    assert all_files_oftype(tmp_dir_name, "txt") == []
+    # directory with no files of the type
+    assert all_files_oftype(tmp_dir_name, tmp_dir_name) == []
+    # when there is stuff to return
+    pathlib.Path(f"{tmp_dir_name}/all_files_oftype.txt").touch()
+    assert all_files_oftype(tmp_dir_name, "txt") == [
+        f"{tmp_dir_name}/all_files_oftype.txt"
+    ]
+    os.remove(f"{tmp_dir_name}/all_files_oftype.txt")
+    rmdir(tmp_dir_name)
 
 
 def test_is_prime():

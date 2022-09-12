@@ -4,10 +4,14 @@
 """
 
 from copy import deepcopy
+import re
 from itertools import repeat
 from math import ceil, sqrt
+import random
 import os
-from typing import Generator, List, Optional
+import glob
+from typing import Generator, List, Optional, Set
+from xmlrpc.client import Boolean
 
 
 def get_env_var(env_var_name: str) -> Optional[str]:
@@ -61,7 +65,7 @@ def star_triangle(st_size: int) -> None:
         print("".join(repeat("*", _)))
 
 
-def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, None]:
+def fibonacci_numbers(max_value: int = 100) -> Generator[int, None, None]:
     """generates Fibonacci Numbers up to the max value"""
     last_two = 0, 1
     if max_value == 0:
@@ -73,8 +77,38 @@ def fibonacci_numbers_generator(max_value: int = 100) -> Generator[int, None, No
             last_two = last_two[1], sum(last_two)
 
 
+def words_from_corpus(directory_path: str) -> Generator[str, None, None]:
+    """
+    generates words from several text files (*.txt) under the directory,
+    where a word is just a string of characters with no spaces, and a line
+    is delimited by the return ('\n') character.
+    """
+    # looping through the corpus directory
+    for filepath in all_files_oftype(directory_path, "txt"):
+        # opening the files
+        with open(filepath, "r", encoding="utf-8") as file_reader:
+            # reading each line of a file
+            text = file_reader.readlines()
+            for line in text:
+                for word in re.sub(
+                    r"\"|,|\'|\.|\n|\!|\-|\<|\>|\=|\+|\^|;|_|\(|\)|\[|\]|\{|\}|#|\?",
+                    " ",
+                    line.strip(),
+                ).split():
+                    yield word
+
+
+def all_files_oftype(directory_path, extension: str) -> List[str]:
+    """returns a list of all files in a directory ending with the provided extension"""
+    return glob.glob(f"{directory_path}/*.{extension}")
+
+
 def konte1a10():
     """fonksyon sa a konte de 1 a 10"""
     for _ in range(1, 11):
         print(_)
 
+
+def random_digit_string(length: int = 6):
+    """return a string of random digits"""
+    return str(random.randint(1, 10**length)).zfill(length)
