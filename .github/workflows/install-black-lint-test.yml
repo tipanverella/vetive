@@ -17,7 +17,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: tipanverella:bato
+      image: tipanverella/bato:koulev
     steps:
     - uses: actions/checkout@v3
     - name: Install dependencies
